@@ -1,4 +1,4 @@
-package de.exxcellent.challenge;
+package de.exxcellent.challenge.model;
 
 import de.exxcellent.challenge.model.DataFrame;
 import org.junit.jupiter.api.Test;
