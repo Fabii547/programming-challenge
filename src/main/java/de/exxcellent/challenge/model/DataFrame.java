@@ -38,7 +38,7 @@ public class DataFrame {
     }
 
     private int getColumnIndexByName(String columnName) {
-        return this.columns.indexOf(columnName);
+        return this.columns.indexOf(columnName.toLowerCase());
     }
 
     public class Row {
