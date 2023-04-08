@@ -2,7 +2,8 @@ package de.exxcellent.challenge.analyzer;
 
 import de.exxcellent.challenge.model.DataFrame;
 
-public class WeatherDataAnalyzer {
+public class WeatherDataAnalyzer implements DataFrameAnalyzer {
+    @Override
     public void analyze(DataFrame df) {
         DataFrame.Row rowOfInterest = null;
         int minTemperatureSpread = Integer.MAX_VALUE;
