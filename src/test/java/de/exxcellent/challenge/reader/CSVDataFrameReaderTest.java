@@ -1,0 +1,35 @@
+package de.exxcellent.challenge.reader;
+
+import de.exxcellent.challenge.model.DataFrame;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CSVDataFrameReaderTest {
+    private CSVDataFrameReader csvReader;
+
+    @BeforeEach
+    public void setup() {
+        this.csvReader = new CSVDataFrameReader();
+    }
+
+    @Test
+    public void testReadingCSV() throws IOException, DataFrame.DataFrameException {
+        DataFrame df = csvReader.parseIntoDataFrame("src/test/resources/test.csv");
+
+        assertEquals(2, df.getRows().size());
+    }
+
+    @Test
+    public void testReadingCSVContent() throws IOException, DataFrame.DataFrameException {
+        DataFrame df = csvReader.parseIntoDataFrame("src/test/resources/test.csv");
+        List<DataFrame.Row> rows = df.getRows();
+
+        // Validate sample value of last row.
+        assertEquals("5", rows.get(1).getColumnValue("COLUMN B"));
+    }
+}
