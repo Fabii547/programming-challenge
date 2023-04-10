@@ -11,13 +11,34 @@ import de.exxcellent.challenge.reader.CSVDataFrameReader;
  */
 public final class App {
 
+    /**
+     * Possible parameters:
+     * --weather src/main/resources/de/exxcellent/challenge/weather.csv
+     * --football src/main/resources/de/exxcellent/challenge/football.csv
+     *
+     * @param args CLI arguments
+     */
     public static void main(String... args) {
-        try {
-            DataFrame weatherDF = new CSVDataFrameReader().parseIntoDataFrame("src/main/resources/de/exxcellent/challenge/weather.csv");
-            new WeatherDataAnalyzer().analyze(weatherDF);
+        if (args.length != 2) {
+            System.out.println("You have to provide two arguments the challenge name and the filepath.");
+            return;
+        }
 
-            DataFrame footballDF = new CSVDataFrameReader().parseIntoDataFrame("src/main/resources/de/exxcellent/challenge/football.csv");
-            new FootballDataAnalyzer().analyze(footballDF);
+        try {
+            switch(args[0]) {
+                case "--weather":
+                    DataFrame weatherDF = new CSVDataFrameReader()
+                            .parseIntoDataFrame(args[1]);
+                    new WeatherDataAnalyzer().analyze(weatherDF);
+                    break;
+                case "--football":
+                    DataFrame footballDF = new CSVDataFrameReader()
+                            .parseIntoDataFrame(args[1]);
+                    new FootballDataAnalyzer().analyze(footballDF);
+                    break;
+                default:
+                    System.out.printf("Unknown challenge '%s' given", args[0]);
+            }
         }
         catch(DataFrame.DataFrameException e) {
             System.out.println("Could not read and analyze the given file.");
