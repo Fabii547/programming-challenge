@@ -57,6 +57,10 @@ public class DataFrame {
         public DataFrameException(String message) {
             super(message);
         }
+
+        public DataFrameException(String message, Throwable cause) {
+            super(message, cause);
+        }
     }
 
     public static class ColumnHeadersFormatException extends DataFrameException {

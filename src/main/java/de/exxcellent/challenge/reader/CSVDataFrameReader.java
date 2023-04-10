@@ -10,7 +10,7 @@ public final class CSVDataFrameReader implements DataFrameReader {
     private static final String VALUE_SEPARATOR = ",";
 
     @Override
-    public DataFrame parseIntoDataFrame(String data) throws IOException, DataFrame.DataFrameException {
+    public DataFrame parseIntoDataFrame(String data) throws DataFrame.DataFrameException {
         DataFrame df;
         try (BufferedReader br = new BufferedReader(new FileReader(data))) {
             String line;
@@ -24,6 +24,9 @@ public final class CSVDataFrameReader implements DataFrameReader {
                 String[] values = line.split(VALUE_SEPARATOR);
                 df.addRow(values);
             }
+        }
+        catch(IOException e) {
+            throw new DataFrame.DataFrameException("Could not read data.", e);
         }
         return df;
     }
